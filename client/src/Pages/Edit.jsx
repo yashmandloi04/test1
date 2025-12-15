@@ -1,9 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
+<<<<<<< HEAD
 import { API_PATH, API_URL } from '../Helpers/Path';
 import { useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import EditValidation from '../Schema/EditValidation';
+=======
+import { API_URL } from '../Helpers/Path';
+import { useParams } from 'react-router-dom';
+import { useFormik } from 'formik';
+import AddProductValidation from '../Schema/ProductValidation';
+>>>>>>> e9bf1036112f1e058d0b4049045e15f6c331d5cd
 
 const Edit = () => {
   useEffect(() => {
@@ -14,6 +21,7 @@ const Edit = () => {
   let imgField = useRef("");
   const fetchProduct = async () => {
     let response = await axios.get(`${API_URL}/product/${params.id}`);
+<<<<<<< HEAD
     setProDetail(response.data[0]);
   }
   const EditProductFrm = useFormik({
@@ -33,11 +41,27 @@ const Edit = () => {
       }else{
         form.append('image', proDetail.image);
       }
+=======
+    console.log(response.data[0]);
+    setProDetail(response.data[0]);
+  }
+  const EditProductFrm = useFormik({
+    validationSchema: AddProductValidation,
+    initialValues: proDetail,
+    onSubmit: async (frmData) => {
+      let image = imgField.current.files[0];
+        let form = new FormData();
+      form.append('image', image);
+>>>>>>> e9bf1036112f1e058d0b4049045e15f6c331d5cd
       form.append('name', frmData.name);
       form.append('description', frmData.description);
       form.append('quantity', frmData.quantity);
       form.append('price', frmData.price);
       let response = await axios.put(`${API_URL}/product/${params.id}`, form);
+<<<<<<< HEAD
+=======
+      console.log(response.data);
+>>>>>>> e9bf1036112f1e058d0b4049045e15f6c331d5cd
     },
     enableReinitialize: true  
   })
@@ -77,12 +101,17 @@ const Edit = () => {
 
         <div>
           <label>Image</label>
+<<<<<<< HEAD
           <div><img src={`${API_PATH}/${proDetail.image}`} alt="" style={{width: '50px'}} /></div>
           <input type='file' name='image' ref={imgField}
            onChange={(event)=>{
             EditProductFrm.setFieldValue("image", event.target.files[0]);
            }}
            onBlur={()=>{EditProductFrm.setFieldTouched("image", true)}} />
+=======
+          <input type='file' name='image' ref={imgField}
+           onChange={EditProductFrm.handleChange} />
+>>>>>>> e9bf1036112f1e058d0b4049045e15f6c331d5cd
            {EditProductFrm.errors.image && EditProductFrm.touched.image && <small className='err1'>{EditProductFrm.errors.image}</small>}
         </div>
 

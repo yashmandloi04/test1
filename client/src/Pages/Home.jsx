@@ -11,6 +11,10 @@ const Home = () => {
   const navigate = useNavigate();
   const fetchProducts = async () => {
     let response = await axios.get(`${API_URL}/product`);
+<<<<<<< HEAD
+=======
+    console.log(response.data)
+>>>>>>> e9bf1036112f1e058d0b4049045e15f6c331d5cd
     setProduct(response.data);
   }
   const deleteProduct = async(proId)=>{
